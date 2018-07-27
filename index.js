@@ -26,4 +26,13 @@ server.get('/api/projects', async (req, res) => {
     }
 });
 
+server.get('/api/projects/:id', async (req, res) => {
+    try {
+        const response = await projects.get(req.params.id);
+        return res.status(200).json(response);
+    } catch (err) {
+        return res.status(500).json({ error: "Couldn't retrieve project information." })
+    }
+})
+
 server.listen(8000, () => console.log('API is running on port 8000...'));
