@@ -1,5 +1,6 @@
 const express = require('express');
 const actions = require('../../data/helpers/actionModel');
+const projects = require('../../data/helpers/projectModel');
 
 const router = express.Router();
 
@@ -19,8 +20,8 @@ router.post('/', async (req, res) => {
                     return res.status(500).json({ error: "There was an error while saving the action to the database." });
                 }
             }
-            return res.status(500).json({ error: "Please provide a project id that matches an existing project's id." })
         }
+        return res.status(500).json({ error: "Please provide a project id that matches an existing project's id." })
     } catch (err) {
         return res.status(500).json({ error: "Couldn't retrieve actions information" });
     }
@@ -62,8 +63,8 @@ router.put('/:id', async (req, res) => {
                     return res.status(500).json({ error: "There was an error while saving the action to the database." });
                 }
             }
-            return res.status(500).json({ error: "Please provide a project id that matches an existing project's id." })
         }
+        return res.status(500).json({ error: "Please provide a project id that matches an existing project's id." })
     } catch (err) {
         return res.status(500).json({ error: "Couldn't retrieve actions information" });
     }
