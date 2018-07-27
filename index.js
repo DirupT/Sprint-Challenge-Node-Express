@@ -35,6 +35,16 @@ server.get('/api/projects/:id', async (req, res) => {
     }
 })
 
+server.get('/api/projects/actions/:id', async (req, res) => {
+    try {
+        const response = await projects.getProjectActions(req.params.id);
+        if (response.length === 0) return res.status(400).json({ error: "The project with the specified ID does not exist or project has no actions!" });
+        return res.status(200).json(response);
+    } catch (err) {
+        return res.status(500).json({ error: "Couldn't retrieve project information." })
+    }
+})
+
 server.put('/api/projects/:id', async (req, res) => {
     const { id } = req.params;
     const { name, description, completed } = req.body;
