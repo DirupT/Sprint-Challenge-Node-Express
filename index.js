@@ -1,5 +1,6 @@
 const express = require('express');
 const projects = require('./data/helpers/projectModel');
+const actions = require('./data/helpers/actionModel');
 
 const server = express();
 server.use(express.json());
@@ -69,5 +70,17 @@ server.delete('/api/projects/:id', async (req, res) => {
         return res.status(500).json({ error: "The project could not be removed" });
     }
 })
+
+// ================================== END OF PROJECTS ================================== //
+
+server.get('/api/actions', async (req, res) => {
+    try {
+        const response = await actions.get();
+        return res.status(200).json(response);
+    } catch (err) {
+        return res.status(500).json({ error: "Couldn't retrieve actions information" });
+    }
+})
+
 
 server.listen(8000, () => console.log('API is running on port 8000...'));
