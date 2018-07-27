@@ -106,5 +106,14 @@ server.get('/api/actions', async (req, res) => {
     }
 })
 
+server.get('/api/actions/:id', async (req, res) => {
+    try {
+        const response = await actions.get(req.params.id);
+        return res.status(200).json(response);
+    } catch (err) {
+        return res.status(500).json({ error: "Couldn't retrieve action information" });
+    }
+})
+
 
 server.listen(8000, () => console.log('API is running on port 8000...'));
