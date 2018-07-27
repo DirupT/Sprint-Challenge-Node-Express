@@ -139,5 +139,14 @@ server.put('/api/actions/:id', async (req, res) => {
     }
 })
 
+server.delete('/api/actions/:id', async (req, res) => {
+    try {
+        const removeResponse = await actions.remove(req.params.id);
+        if (removeResponse === 0) return res.status(404).json({ error: "The action with the specified ID does not exist." });
+        res.status(200).json(removeResponse);
+    } catch (err) {
+        return res.status(500).json({ error: "The action could not be removed" });
+    }
+})
 
 server.listen(8000, () => console.log('API is running on port 8000...'));
